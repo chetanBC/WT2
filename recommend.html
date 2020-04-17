@@ -48,6 +48,12 @@
             <a class="nav-link" href="orders.html">My Orders</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="recommend.html">Recommendations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="complaint.html">Complaint</a>
+          </li>
+          <li class="nav-item">
             <button type="button" class=" btn btn-link" onclick="logout()">Log Out</button>
             <!-- <a class="nav-link" href="home.html" >Logout</a> -->
           </li>
@@ -153,15 +159,15 @@
 	  self.init = function(){
         movie = prompt("Enter your movie name:","EM1")
         $http.get('http://127.0.0.1:5000/api/recommend/' + movie).then(function(response) {
-            self.dat = response.data[0];
-            
+            self.dat = response.data;
+            //alert(self.dat)
         },
         function(errResponse){
             console.error('Error');
         });
         console.log(self.dat)
             
-    };
+    }; 
 
 
       self.buy=function(){

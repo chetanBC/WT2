@@ -55,6 +55,12 @@ conn.execute('''CREATE TABLE IF NOT EXISTS Orders(
             );''')
 
 
+#complaint table
+conn.execute('''CREATE TABLE IF NOT EXISTS Complaint(
+            username TEXT PRIMARY KEY,
+            complaint TEXT
+            );''')
+
 # add products to database
 '''conn = sqlite3.connect('database.db',check_same_thread=False)
 
@@ -511,6 +517,31 @@ def KNN(trainData,testData):
     return result
                 
 
+
+@app.route('/api/complaint',methods=["POST","OPTIONS"])
+@cross_origin(origin="*")
+def complaint():
+
+    #extract data
+    d=request.get_json()
+    
+    
+    
+    data = [d["username"],d["pwd"]]
+    data = ",".join("'{}'".format(i) for i in data)
+    
+    
+    #connect to database
+    conn = sqlite3.connect('database.db',check_same_thread=False)
+
+
+    #insert user data into database
+    query="INSERT INTO Complaint ( username,complaint ) VALUES ( " + data + " );"
+    conn.execute(query)
+    conn.commit()
+    conn.close()
+
+    return "Complaint successfully Registered!"
 
 
 if(__name__=="__main__"):
