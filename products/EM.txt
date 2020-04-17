@@ -1,0 +1,5 @@
+EM1;Apple iPhone 8 Plus ;57899;256 GB ROM |13.97 cm (5.5 inch) Retina HD Display12MP + 12MP | 7MP Front Camera| A11 Bionic Chip with 64-bit Architecture, Neural Engine, Embedded M11 Motion Coprocessor Processor;20
+EM2;Samsung Galaxy S20;70500; 8 GB RAM | 128 GB ROM | Expandable Upto 1 TB | 15.75 cm (6.2 inch) Quad HD+ Display | 64MP + 12MP + 12MP | 10MP Front Camera | 4000 mAh Lithium-ion Battery | Exynos 990 Processor;15
+EM3;Redmi 8 ;8999;4 GB RAM | 64 GB ROM | Expandable Upto 512 GB| 15.8 cm (6.22 inch) HD+ Display| 12MP + 2MP | 8MP Front Camera|5000 mAh Battery| Qualcomm Snapdragon 439 Processor;50
+EM4;Honor 20i ;10999;4 GB RAM | 128 GB ROM | Expandable Upto 512 GB|15.77 cm (6.21 inch) Full HD+ Display|24MP + 2MP + 8MP | 32MP Front Camera|3400 mAh Battery|HiSilicon Kirin 710 Processor;12
+EM5;Asus ZenFone Max M2 ;7499;3 GB RAM | 32 GB ROM | Expandable Upto 2 TB|15.9 cm (6.26 inch) HD+ Display|13MP + 2MP | 8MP Front Camera|4000 mAh Battery|Qualcomm Snapdragon 632 Octa Core Processor;5

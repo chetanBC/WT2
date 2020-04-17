@@ -1,0 +1,5 @@
+TT1;LG 139cm (55 inch) Ultra HD (4K) LED Smart TV;50999;Supported Apps: Netflix/Prime Video/Youtube|Operating System: WebOS|Resolution: Ultra HD (4K) 3840 x 2160 Pixels|Sound Output: 20 W|Refresh Rate: 50 Hz;7
+TT2;Samsung Super 6 138cm (55 inch) Ultra HD (4K) LED Smart TV;49999;Supported Apps: Netflix/Prime Video/Hotstar/Youtube|Operating System: Tizen|Resolution: Ultra HD (4K) 3840 x 2160 Pixels|Sound Output: 20 W|Refresh Rate: 60 Hz;12
+TT3;Mi LED Smart TV 4A PRO 80 cm (32) with Android;12499;Supported Apps: Hotstar/Youtube|Operating System: Android (Google Assistant & Chromecast in-built)|Resolution: HD Ready 1366 x 768 Pixels|Sound Output: 20 W|Refresh Rate: 60 Hz;23
+TT4;Sony Bravia R202F 80cm (32 inch) HD Ready LED TV;14999;Resolution: HD Ready 1366 x 768 Pixels|Sound Output: 20 W|Refresh Rate: 50 Hz;5
+TT5;Motorola 189cm (75 inch) Ultra HD (4K) LED Smart Android TV with Wireless Gamepad;119999;Supported Apps: Netflix/Prime Video/Hotstar/Youtube|Operating System: Android (Google Assistant & Chromecast in-built)|Resolution: Ultra HD (4K) 3840 x 2160 Pixels|Sound Output: 30 W|Refresh Rate: 60 Hz;10

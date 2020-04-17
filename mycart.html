@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>My Cart</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/shop-homepage.css" rel="stylesheet">
+
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+
+<body>
+  <script>
+    function logout(){ 
+        document.cookie = "username=none";
+        window.location = "home.html";
+      }
+  </script>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Amazon</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="mycart.html">My Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="orders.html">My Orders</a>
+          </li>
+          <li class="nav-item">
+            <button type="button" class=" btn btn-link" onclick="logout()">Log Out</button>
+            <!-- <a class="nav-link" href="home.html" >Logout</a> -->
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div ng-app = "cart"  ng-controller="MainCtrl as ctrl" class="container">
+
+    <div class="row" ng-init = "ctrl.init()">
+
+      <div class="col-lg-3">
+
+        <h1 class="my-4">Shop By Category</h1>
+        <div class="list-group">
+			<button type="button" class="list-group-item btn btn-link" ng-click="ctrl.category('EM')">Mobiles</button>
+			<button type="button" class="list-group-item btn btn-link" ng-click="ctrl.category('EL')">Laptops</button>
+			<button type="button" class="list-group-item btn btn-link" ng-click="ctrl.category('TT')">TVs</button>
+			<button type="button" class="list-group-item btn btn-link" ng-click="ctrl.category('TW')">Washing Machine</button>
+        </div>
+
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9" id="hide">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4" ng-show ="ctrl.cartdata" ng-repeat = "item in ctrl.cartdata">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src={{item[1]}} alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">{{item[4]}}</a>
+                </h4>
+				<h5>Price :{{item[2]}}</h5>
+				<h5>Quantity :{{item[3]}}</h5>
+                <button class="btn btn-primary col-sm-offset-3" ng-show="ctrl.flag && ctrl.bflag" ng-click="ctrl.buy()">Buy</button>
+				
+				<!-- Rating -->
+				<div class="form-group" ng-show="!ctrl.flag">
+					Rating:<input ng-model="ctrl.rating" ng-value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+				</div>
+				<div class="form-group" ng-show="!ctrl.flag">
+				Quantity:<input  ng-model="ctrl.quantity" type="number" ng-value="1" class="rating" min=0 max=5 step=1 data-size="xs">
+				</div>
+				
+        <button class="btn btn-primary col-sm-offset-3" ng-show="!ctrl.flag" ng-click="ctrl.buy1()" >Buy</button>
+        
+
+                <p class="card-text" ng-show="ctrl.flag">{{item[5]}}</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+              </div>
+            </div>
+		  </div>
+		  
+		  <h1 ng-show = "!ctrl.cartdata">Your cart is empty!</h1>
+          
+
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark ">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+    angular.module("cart",[]).controller("MainCtrl",['$http',function($http){
+      self=this;
+      self.ab =true;
+      self.flag=true;
+      self.bflag=true;
+	  self.cartdata=[]
+	  self.fullcartdata = []
+
+	  self.category = function(type){
+          if(type=="EM"){window.location="mobiles.html"}
+          else if(type=="EL"){window.location="laptop.html"}
+          else if(type=="TT"){window.location="tv.html"}
+          else if(type=="TW"){window.location="wash.html"}
+      };
+
+	  self.init = function(){
+      var x=document.cookie;
+      x=x.split("=");
+        path='http://127.0.0.1:5000/api/mycart/'+x[1];
+				$http.get(path).then(function(response) {
+					self.cartdata = response.data;
+					if(self.cartdata){
+					for (let item in self.cartdata){
+						$http.get('http://127.0.0.1:5000/api/getitemdata/' + self.cartdata[item][1]).then(function(response) {
+							dat = response.data[0];
+							self.cartdata[item][1] = "./images/" + self.cartdata[item][1] + ".jpeg"
+							self.cartdata[item].push(dat[1])
+							self.cartdata[item].push(dat[3])
+							self.fullcartdata.push(dat);
+						},
+						function(errResponse){
+							console.error('Error');
+						});
+					}
+					console.log(self.cartdata)
+					
+				}
+                }, 
+                
+				function(errResponse) {
+					console.error('Error');
+				});
+
+				
+    	};
+
+
+      self.buy=function(){
+          self.flag=false;  
+      };
+
+      self.buy1=function(){
+        // var item_id = angular.element(document.getElementById('itemid'))[0].innerHTML;
+        // self.ab=false;
+        // var price = angular.element(document.getElementById('price'))[0].innerHTML;
+        var x=document.cookie;
+        x=x.split("=");
+        
+          for(let item in self.cartdata){
+            self.data = {"username":x[1],"itemId":self.fullcartdata[item][0],"price":self.cartdata[item][2],"quantity":self.quantity,"rating":self.rating}
+
+            $http.post('http://127.0.0.1:5000/api/buy',self.data).then(function(response) {
+            self.result = response.data;
+            if(self.result == "Order placed!"){
+              window.location="index.html";
+            }
+            alert(self.result);
+            }, 
+            function(errResponse) {
+              alert("Error in buying");
+            });
+          }
+
+      };
+
+      self.removecart=function(){
+        self.bflag=false;  
+      };
+
+      self.addcart1=function(){
+        var item_id = angular.element(document.getElementById('itemid'))[0].innerHTML;
+        self.ab=false;
+        var price = angular.element(document.getElementById('price'))[0].innerHTML;
+
+        var x=document.cookie;
+         x=x.split("=");
+        
+        self.data = {"username":x[1],"itemId":item_id,"price":price,"quantity":self.quantity}
+
+        $http.post('http://127.0.0.1:5000/api/addtocart',self.data).then(function(response) {
+          self.result = response.data;
+          if(self.result == "Item added to Cart!"){
+            window.location="index.html";
+          }
+          alert(self.result);
+        }, 
+        function(errResponse) {
+          alert("Error in adding to cart");
+        });
+      };
+
+      }]);
+    
+  </script>
+
+</body>
+
+</html>
